@@ -5,8 +5,8 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'utils'))
 from colors import colors
 
-WIDTH = 1360
-HEIGHT = 720
+WIDTH = 1200
+HEIGHT = 600
 TIME = 0
 
 def init():
@@ -34,7 +34,7 @@ def displayPlanets ():
               [2], colors[planet_color1]
               [3])
     glRotatef ( 0.8 * TIME, 0, 1, 0) 
-    glutWireSphere(0.6, 16, 16)
+    glutWireSphere(0.6, 24, 24)
     glPopMatrix()
     
     #planeta com movimentação invertida
@@ -47,7 +47,7 @@ def displayPlanets ():
               [3])
     glRotatef ( -1.5 * TIME, 0, 1, 0) 
     glTranslatef (2.45, 0.1, 2)
-    glutWireSphere(0.3, 16, 16)
+    glutWireSphere(0.3, 24, 24)
     glPopMatrix()
     
     # planeta com luas
@@ -61,7 +61,7 @@ def displayPlanets ():
     glRotatef (TIME, 0, 1.2, 0)
     glTranslatef(2, 0, 0)
     glPushMatrix()
-    glutWireSphere(0.2, 16, 16)
+    glutWireSphere(0.2, 24, 24)
     glPopMatrix()
 
     #lua 1
@@ -74,7 +74,7 @@ def displayPlanets ():
               [3])
     glRotatef (1.7 * TIME, 0, 1, 0)
     glTranslatef(0.3, 0, 0)
-    glutWireSphere(0.05, 16, 16)
+    glutSolidSphere(0.05, 24, 24)
     glPopMatrix()
 
     #lua 2
@@ -87,7 +87,7 @@ def displayPlanets ():
               [3])
     glRotatef (2.1 * TIME, 1, 1, 0)
     glTranslatef(0.3, 0, 0)
-    glutWireSphere(0.03, 16, 16)
+    glutSolidSphere(0.03, 24, 24)
     glPopMatrix()
     glPopMatrix()
 
@@ -106,13 +106,13 @@ def reshape(width, height):
     
     glMatrixMode(GL_PROJECTION)
     gluPerspective(80, WIDTH / HEIGHT, 0, 1)
-    gluLookAt (0, 0, 5, 0, 0, 0, 0, 1, 0)
+    gluLookAt (0, 1, 4.2, 0, 0, 0, 0, 1, 0)
 
 def main():
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH)
     glutInitWindowSize(WIDTH, HEIGHT)
-    glutInitWindowPosition(100, 100)
+    glutInitWindowPosition(0, 0)
     glutCreateWindow(b"Sistema solar | DaniloVFreire")
     init()
     glutDisplayFunc(display)
