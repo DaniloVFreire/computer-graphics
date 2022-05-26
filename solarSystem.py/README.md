@@ -1,5 +1,6 @@
 # Solar system
-1. solar system preview
+1. solar system preview  
+
 ![Solar System gif](presentation/solarSystem.gif)  
 
 
