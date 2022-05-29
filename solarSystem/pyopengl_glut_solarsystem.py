@@ -112,7 +112,7 @@ def main():
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH)
     glutInitWindowSize(WIDTH, HEIGHT)
-    glutInitWindowPosition(0, 0)
+    glutInitWindowPosition(100, 50)
     glutCreateWindow(b"Sistema solar | DaniloVFreire")
     init()
     glutDisplayFunc(display)
