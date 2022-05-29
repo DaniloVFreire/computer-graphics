@@ -1,4 +1,4 @@
-# Solar system
+# House
 1. house preview  
 
 ![Solar System gif](presentation/house.gif)  
