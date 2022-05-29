@@ -12,5 +12,5 @@ $pip install os
 $conda install
 ```
 # Sub projects
-1. [Solar System](https://github.com/DaniloVFreire/computer-graphics/tree/main/solarSystem.py)
+1. [Solar System](https://github.com/DaniloVFreire/computer-graphics/tree/main/solarSystem)
 2. [House](https://github.com/DaniloVFreire/computer-graphics/tree/main/house)
