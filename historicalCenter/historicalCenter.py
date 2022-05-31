@@ -545,8 +545,10 @@ def drawDinamicParts():
 def display():
     glPushMatrix()
     glEnable(GL_DEPTH_TEST)
+    glTranslatef(45,5,0.0)
     glRotatef (Y_AXE, 0.0, 1.0, 0.0)
     glRotatef (X_AXE, 1.0, 0.0, 0.0)
+    glTranslatef(-45,-5,0.0)
     glClearDepth(1.0)
     glDepthMask(GL_TRUE)
     glDepthFunc(GL_LEQUAL)
