@@ -264,10 +264,37 @@ STATIC_VERTEXES = [
         5., 20, 50., #9 
         5., 5, 50., #10
         0, 5, 50., #11
-        0, 20, 5., #12 
-        5., 20, 5., #5 
-        5., 5, 5., #14
-        0, 5, 5., #15 
+        0, 20, 0., #12 
+        5., 20, 0., #5 
+        5., 5, 0., #14
+        0, 5, 0., #15
+        #28 parede esquerda
+       70, 20, 50., #8    
+        75, 20, 50., #9 
+        75, 5, 50., #10
+       70, 5, 50., #11
+       70, 20, 0., #12 
+        75, 20, 0., #5 
+        75, 5, 0., #14
+       70, 5, 0., #15 
+       #26 retangulo teto
+        0, 20, 50., #8    
+        77., 20, 50., #9 
+        77., 18, 50., #10
+        0, 18, 50., #11
+        0, 20, 0., #12 
+        77., 20, 0., #77 
+        77., 18, 0., #14
+        0, 18, 0., #15 
+        #26 parede fundo teto
+        0, 20, 50., #8    
+        77., 20, 50., #9 
+        77.,0, 50., #10
+        0,0, 50., #11
+        0, 20, 45., #12 
+        77., 20, 45., #77 
+        77.,0, 45., #14
+        0,0, 45., #15 
         #topo piramide
         36, 25,-5
 ]
@@ -298,7 +325,7 @@ STATIC_VERTEXES_COLORS = [
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
-[ 'red', 'red', 'red', 'red', 'red', 'red'],
+[ 'gray', 'gray', 'gray', 'gray', 'gray', 'gray'],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],#30
@@ -321,7 +348,7 @@ for i in range(STATIC_RECTAGLES):
 
 CF = []
 for i in range(STATIC_RECTAGLES):
-  CF.append([0 + X[i] ,1+ X[i] ,2 + X[i] ,3 + X[i] ])
+  CF.append([0 + X[i] ,3+ X[i] ,2 + X[i] , 1+ X[i] ])
 
 CBK = []
 for i in range(STATIC_RECTAGLES):
@@ -491,7 +518,7 @@ def drawDinamicParts():
   glRotatef (WINDOW_ANGLE, 0.0, 1.0, 0.0)
   glTranslatef(-5,-5,0.0)
   glEnableClientState(GL_VERTEX_ARRAY)
-  drawRectagle(CF[0], CR[0], CL[0], CBK[0],CBM[0], CT[0], ['red','','','','',''])
+  drawRectagle(CF[0], CR[0], CL[0], CBK[0],CBM[0], CT[0], ['red','red','red','red','red','red'])
   glDisableClientState(GL_VERTEX_ARRAY)
   glPopMatrix()
 
@@ -501,7 +528,7 @@ def drawDinamicParts():
   glRotatef (WINDOW_ANGLE, 0.0, -1.0, 0.0)
   glTranslatef(-10,-5,0.0)
   glEnableClientState(GL_VERTEX_ARRAY)
-  drawRectagle(CF[1], CR[1], CL[1], CBK[1],CBM[1], CT[1], ['red','','','','',''])
+  drawRectagle(CF[1], CR[1], CL[1], CBK[1],CBM[1], CT[1], ['red','red','red','red','red','red'])
   glDisableClientState(GL_VERTEX_ARRAY)
   glPopMatrix()
 
@@ -511,7 +538,7 @@ def drawDinamicParts():
   glRotatef (WINDOW_ANGLE, 0.0, 1.0, 0.0)
   glTranslatef(-20,-5,0.0)
   glEnableClientState(GL_VERTEX_ARRAY)
-  drawRectagle(CF[2], CR[2], CL[2], CBK[2],CBM[2], CT[2], ['red','','','','',''])
+  drawRectagle(CF[2], CR[2], CL[2], CBK[2],CBM[2], CT[2], ['red','red','red','red','red','red'])
   glDisableClientState(GL_VERTEX_ARRAY)
   glPopMatrix()
 
