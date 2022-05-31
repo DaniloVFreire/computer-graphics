@@ -26,15 +26,15 @@ PR = [1,5,8]
 PB = [5,4,8]
 
 vertices = np.array([
-        -2.5, 2.5, 2.5, #0
-        2.5, 2.5, 2.5, #1 
-        2.5, -2.5, 2.5, #2 
-        -2.5, -2.5, 2.5, #3 
-        -2.5, 2.5, -2.5, #4 
-        2.5, 2.5, -2.5, #5 
-        2.5, -2.5, -2.5, #6 
-        -2.5, -2.5, -2.5, #7 
-        0., 4.5, 0., #8 
+        -3., 3., 3., #0
+        3., 3., 3., #1 
+        3., -3., 3., #2 
+        -3., -3., 3., #3 
+        -3., 3., -3., #4 
+        3., 3., -3., #5 
+        3., -3., -3., #6
+        -3., -3., -3., #7 
+        0., 6, 0., #8 
 ], dtype=np.float32)
 
 def init():
@@ -44,7 +44,7 @@ def init():
                  [1], colors[bg_color]
                  [2], colors[bg_color]
                  [3])  # cor de fundo
-    glOrtho (-10, 10, -10, 10, -10 , 10)
+    glOrtho (1, -1, -1, 1, -1 , 1)
     glEnable(GL_DEPTH_TEST)
     glEnable(GL_CULL_FACE)
 
@@ -53,8 +53,8 @@ def reshape (w, h):
     WIDTH = w
     HEIGHT = h
     glViewport(0, 0, WIDTH, HEIGHT)
-    gluPerspective(10, WIDTH / HEIGHT, 0, 10)
-    gluLookAt (0, 0, -10, 0, 0, 0, 0, 1, 0)
+    gluPerspective(10, WIDTH / HEIGHT, 0, 3)
+    gluLookAt (0, 0, -200, 0, 0, 0, 0, 1, 0)
 
 def drawHouse():
     sc1 = 'blue'
@@ -149,7 +149,7 @@ def keyboard(key, x, y):
     if key == b'd' or key == b'D':
         Y_AXE = Y_AXE + 5
         glutPostRedisplay()
-    if key == b'a' or key == b'A':
+    elif key == b'a' or key == b'A':
         Y_AXE = Y_AXE - 5
         glutPostRedisplay()
     elif key == b'w' or key == b'W':
