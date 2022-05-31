@@ -250,6 +250,24 @@ STATIC_VERTEXES = [
         13.+TL2+ DB/2, 10.+DB, 0., #13 
         13.+TL2+ DB/2, 2.+DB, 0., #14
         8.+TL2+ DB/2, 2.+DB, 0., #15 
+        #26 retangulo chão
+        0, 5, 50., #8    
+        77., 5, 50., #9 
+        77., 0, 50., #10
+        0, 0, 50., #11
+        0, 5, 0., #12 
+        77., 5, 0., #77 
+        77., 0, 0., #14
+        0, 0, 0., #15 
+        #27 parede esquerda
+        0, 20, 50., #8    
+        5., 20, 50., #9 
+        5., 5, 50., #10
+        0, 5, 50., #11
+        0, 20, 5., #12 
+        5., 20, 5., #5 
+        5., 5, 5., #14
+        0, 5, 5., #15 
         #topo piramide
         36, 25,-5
 ]
@@ -278,25 +296,32 @@ STATIC_VERTEXES_COLORS = [
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
 [ 'gray', '', 'gray', 'gray', 'gray', ''],
-[ 'gray', '', 'gray', 'gray', 'gray', ''],]#25
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'red', 'red', 'red', 'red', 'red', 'red'],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],#30
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],
+[ 'gray', '', 'gray', 'gray', 'gray', ''],]
 
 STATIC_RECTAGLES = int((len(STATIC_VERTEXES))/(24) )
 STATIC_VERTEXES = np.array(STATIC_VERTEXES, dtype=np.float32)
 
-print(STATIC_RECTAGLES*8)
-
 PYRAMID_VERTEXES_VALUE = 8 * 11
-PF = [0 + PYRAMID_VERTEXES_VALUE ,1 + PYRAMID_VERTEXES_VALUE,200]
-PL = [4+ PYRAMID_VERTEXES_VALUE,0+ PYRAMID_VERTEXES_VALUE,200]
-PR = [1+ PYRAMID_VERTEXES_VALUE,5+ PYRAMID_VERTEXES_VALUE,200]
-PB = [5+ PYRAMID_VERTEXES_VALUE,4+ PYRAMID_VERTEXES_VALUE,200]
+PF = [0 + PYRAMID_VERTEXES_VALUE ,1 + PYRAMID_VERTEXES_VALUE,int((len(STATIC_VERTEXES))/(24) )*8]
+PL = [4+ PYRAMID_VERTEXES_VALUE,0+ PYRAMID_VERTEXES_VALUE,int((len(STATIC_VERTEXES))/(24) )*8]
+PR = [1+ PYRAMID_VERTEXES_VALUE,5+ PYRAMID_VERTEXES_VALUE,int((len(STATIC_VERTEXES))/(24) )*8]
+PB = [5+ PYRAMID_VERTEXES_VALUE,4+ PYRAMID_VERTEXES_VALUE,int((len(STATIC_VERTEXES))/(24) )*8]
 
 for i in range(STATIC_RECTAGLES):
   X.append(i*8)
 
 CF = []
 for i in range(STATIC_RECTAGLES):
-  CF.append([3 + X[i] ,2+ X[i] ,1 + X[i] ,0+ X[i] ])
+  CF.append([0 + X[i] ,1+ X[i] ,2 + X[i] ,3 + X[i] ])
 
 CBK = []
 for i in range(STATIC_RECTAGLES):
@@ -329,7 +354,24 @@ DINAMIC_VERTEXES=[
         7.5, 12, 0.,  
         7.5, 5, 0., 
         5 , 5, 0.,
-       
+    #janela gira pra esquerda
+      7.5, 12, 0.5,    
+       10, 12, 0.5, 
+       10, 5, 0.5, 
+      7.5 , 5, 0.5, 
+      7.5 , 12, 0.,  
+       10, 12, 0.,  
+       10, 5, 0., 
+      7.5 , 5, 0.,
+    # porta
+      20, 12, 0.5,    
+       28, 12, 0.5, 
+       28, 5, 0.5, 
+      20 , 5, 0.5, 
+      20 , 12, 0.,  
+       28, 12, 0.,  
+       28, 5, 0., 
+      20 , 5, 0.,  
 ]
 DINAMIC_RECTANGLES = int(len(DINAMIC_VERTEXES)/(24))
 DINAMIC_VERTEXES = np.array(DINAMIC_VERTEXES, dtype=np.float32)
@@ -341,8 +383,6 @@ def init():
                  [2], colors[bg_color]
                  [3])  # cor de fundo
     glOrtho (1, -1, -1, 1, -1 , 1)
-    glEnable(GL_DEPTH_TEST)
-    glEnable(GL_CULL_FACE)
 
 
 def reshape(w, h):
@@ -402,14 +442,12 @@ def drawRectagle(f, r, l, bk, bm, t, colorl):
                  [2], colors[sc6]
                  [3])
     glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, t)
-    print("[ '" +sc1 + "', '" +sc2 + "', '" +sc3 + "', '" +sc4 + "', '" +sc5 + "', '" +sc6 + "'],")
 
 def drawStaticFront():
   glEnableClientState(GL_VERTEX_ARRAY)
   glVertexPointer(3, GL_FLOAT, 0, STATIC_VERTEXES)
 
   for i in range (STATIC_RECTAGLES):
-    print(i)
     drawRectagle(CF[i], CR[i], CL[i], CBK[i],CBM[i], CT[i], STATIC_VERTEXES_COLORS[i])
 
   pc1 = 'gray'
@@ -448,25 +486,46 @@ def drawStaticFront():
 
 def drawDinamicParts():
   glPushMatrix()
-  glTranslatef(7.5,5,0.0)
-  glRotatef (WINDOW_ANGLE, 0.0, 1.0, 0.0)
-  glTranslatef(-7.5,-5,0.0)
-  glEnableClientState(GL_VERTEX_ARRAY)
   glVertexPointer(3, GL_FLOAT, 0, DINAMIC_VERTEXES)
+  glTranslatef(5,5,0.0)
+  glRotatef (WINDOW_ANGLE, 0.0, 1.0, 0.0)
+  glTranslatef(-5,-5,0.0)
+  glEnableClientState(GL_VERTEX_ARRAY)
+  drawRectagle(CF[0], CR[0], CL[0], CBK[0],CBM[0], CT[0], ['red','','','','',''])
+  glDisableClientState(GL_VERTEX_ARRAY)
+  glPopMatrix()
 
-  for i in range (DINAMIC_RECTANGLES):
-    print(i)
-    drawRectagle(CF[i], CR[i], CL[i], CBK[i],CBM[i], CT[i], ['red','','','','',''])
+  glPushMatrix()
+  glVertexPointer(3, GL_FLOAT, 0, DINAMIC_VERTEXES)
+  glTranslatef(10,5,0.0)
+  glRotatef (WINDOW_ANGLE, 0.0, -1.0, 0.0)
+  glTranslatef(-10,-5,0.0)
+  glEnableClientState(GL_VERTEX_ARRAY)
+  drawRectagle(CF[1], CR[1], CL[1], CBK[1],CBM[1], CT[1], ['red','','','','',''])
+  glDisableClientState(GL_VERTEX_ARRAY)
+  glPopMatrix()
 
+  glPushMatrix()
+  glVertexPointer(3, GL_FLOAT, 0, DINAMIC_VERTEXES)
+  glTranslatef(20,5,0.0)
+  glRotatef (WINDOW_ANGLE, 0.0, 1.0, 0.0)
+  glTranslatef(-20,-5,0.0)
+  glEnableClientState(GL_VERTEX_ARRAY)
+  drawRectagle(CF[2], CR[2], CL[2], CBK[2],CBM[2], CT[2], ['red','','','','',''])
   glDisableClientState(GL_VERTEX_ARRAY)
   glPopMatrix()
 
 def display():
     glPushMatrix()
+    glEnable(GL_DEPTH_TEST)
     glRotatef (Y_AXE, 0.0, 1.0, 0.0)
     glRotatef (X_AXE, 1.0, 0.0, 0.0)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT )
-
+    glClearDepth(1.0)
+    glDepthMask(GL_TRUE)
+    glDepthFunc(GL_LEQUAL)
+    glDepthRange(0.0, 1.0)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    
     drawStaticFront()
     drawDinamicParts()
     glPopMatrix()
